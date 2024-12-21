@@ -72,6 +72,12 @@ const multipleRecipesSchema = {
 
 // Route to Get Recipes
 app.get("/getRecipes", async (req, res) => {
+  const secretKey = req.query.secretKey;
+
+  if (secretKey !== process.env.SECRET_KEY) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
   const query = req.query.recipeQuery;
   const numberOfRecipes = parseInt(req.query.numberOfRecipes) || 5; // Default to 5 recipes
 
