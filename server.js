@@ -71,10 +71,10 @@ const multipleRecipesSchema = {
 };
 
 // Route to Get Recipes
-app.get("/getRecipes", async (req, res) => {
-  const secretKey = req.query.secretKey;
+app.post("/getRecipes", async (req, res) => {
+  const devKey = req.headers.devKey;
 
-  if (secretKey !== process.env.SECRET_KEY) {
+  if (devKey !== process.env.SECRET_KEY) {
     return res.status(401).json({ error: "Unauthorized" });
   }
 
