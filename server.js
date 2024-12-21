@@ -72,7 +72,7 @@ const multipleRecipesSchema = {
 
 // Route to Get Recipes
 app.get("/getRecipes", async (req, res) => {
-  const devKey = req.headers.devKey;
+  const devKey = req.headers.devkey;
 
   if (devKey !== process.env.SECRET_KEY) {
     return res.status(401).json({ error: "Unauthorized" });
@@ -124,5 +124,5 @@ app.get("/getRecipes", async (req, res) => {
 
 // Start the Server
 app.listen(port, () => {
-  console.log(`Recipe server running at http://localhost:${port}`);
+  console.log(`Recipes Provider server running at port:${port}`);
 });
