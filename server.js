@@ -71,7 +71,7 @@ const multipleRecipesSchema = {
 };
 
 // Route to Get Recipes
-app.post("/getRecipes", async (req, res) => {
+app.get("/getRecipes", async (req, res) => {
   const devKey = req.headers.devKey;
 
   if (devKey !== process.env.SECRET_KEY) {
