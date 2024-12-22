@@ -13,36 +13,61 @@ const openai = new OpenAI({
   apiKey: OPENAI_API_KEY,
 });
 
-// JSON Schema for a Single Recipe
 const singleRecipeSchema = {
   type: "object",
   properties: {
-    title: { type: "string", description: "The title of the recipe" },
+    title: {
+      type: "string",
+      description: "The title of the recipe",
+    },
     ingredients: {
       type: "array",
-      description: "List of ingredients with item names and quantities",
+      description: "List of ingredients with item names, amounts, and units",
       items: {
         type: "object",
         properties: {
-          item: { type: "string", description: "Ingredient name" },
-          quantity: {
+          item: {
             type: "string",
-            description: "Quantity of the ingredient",
+            description: "Ingredient name",
+          },
+          amount: {
+            type: "integer",
+            description:
+              "The numerical amount of the ingredient (e.g., 2, 1.5)",
+          },
+          unit: {
+            type: "string",
+            description: "The unit of measurement for the ingredient",
+            enum: [
+              "grams",
+              "kilograms",
+              "liters",
+              "milliliters",
+              "cups",
+              "tablespoons",
+              "teaspoons",
+              "pieces",
+            ],
           },
         },
-        required: ["item", "quantity"],
+        required: ["item", "amount", "unit"],
       },
     },
     instructions: {
       type: "array",
       description: "Step-by-step instructions for the recipe",
-      items: { type: "string" },
+      items: {
+        type: "string",
+      },
     },
     estimatedCookingTime: {
       type: "integer",
       description: "Cooking time in minutes",
     },
-    servings: { type: "integer", description: "Number of servings" },
+    servings: {
+      type: "integer",
+      description: "Number of servings",
+    },
   },
   required: [
     "title",
