@@ -31,7 +31,7 @@ const singleRecipeSchema = {
             description: "Ingredient name",
           },
           amount: {
-            type: "integer",
+            type: "number",
             description:
               "The numerical amount of the ingredient (e.g., 2, 1.5)",
           },
@@ -94,17 +94,23 @@ const multipleRecipesSchema = {
   additionalProperties: false,
 };
 
-// Route to Get Recipes
-app.get("/getRecipes", async (req, res) => {
+function authorize(req) {
   const devKey = req.headers.devkey;
 
   if (devKey !== process.env.SECRET_KEY) {
-    return res.status(401).json({ error: "Unauthorized" });
+    return false;
   }
 
+  return true;
+}
+
+// Route to Get Recipes
+app.get("/getRecipes", async (req, res) => {
   const query = req.query.recipeQuery;
   const numberOfRecipes = parseInt(req.query.numberOfRecipes) || 5; // Default to 5 recipes
-
+  if (authorize(req) === false) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
   if (!query) {
     return res
       .status(400)
@@ -146,6 +152,55 @@ app.get("/getRecipes", async (req, res) => {
   }
 });
 
+const randomQuoteSchema = {
+  type: "object",
+  properties: {
+    quote: {
+      type: "string",
+      description: "A random quote about cooking",
+    },
+  },
+  required: ["quote"],
+  additionalProperties: false,
+};
+
+app.get("/randomQuote", async (req, res) => {
+  if (authorize(req) === false) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  try {
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+        { role: "system", content: "You are a renown chef and philosopher." },
+        {
+          role: "user",
+          content: `Generate a random quote about cooking strictly following the given schema.`,
+        },
+      ],
+      response_format: {
+        type: "json_schema",
+        json_schema: {
+          name: "random_quote_schema",
+          schema: randomQuoteSchema,
+        },
+      },
+    });
+
+    const quote = JSON.parse(completion.choices[0].message.content);
+    res.json(quote);
+  } catch (error) {
+    console.error(
+      "Error fetching random quote:",
+      error.response?.data || error.message
+    );
+    res.status(500).json({
+      error: "Failed to fetch random quote. Please try again later.",
+      details: error.response?.data || error.message,
+    });
+  }
+});
 // Start the Server
 app.listen(port, () => {
   console.log(`Recipes Provider server running at port:${port}`);
