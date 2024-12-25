@@ -125,7 +125,7 @@ app.get("/getRecipes", async (req, res) => {
         { role: "system", content: "You are a recipe generator." },
         {
           role: "user",
-          content: `Generate ${numberOfRecipes} recipes for "${query}" strictly following the given schema.`,
+          content: `Generate ${numberOfRecipes} recipes for "${query}" strictly following the given schema. All ingredient names must be lowercase.`,
         },
       ],
       response_format: {
