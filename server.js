@@ -37,11 +37,9 @@ const singleRecipeSchema = {
           },
           unit: {
             type: "string",
-            description:
-              "The unit of measurement for the ingredient, determined by its type (solid or liquid), solid is grams, milligrams, kilograms, pieces, liquid is liters, milliliters, cups, tablespoons, teaspoons",
+            description: "The unit of measurement for the ingredient",
             enum: [
               "grams",
-              "milligrams",
               "kilograms",
               "liters",
               "milliliters",
@@ -51,13 +49,8 @@ const singleRecipeSchema = {
               "pieces",
             ],
           },
-          type: {
-            type: "string",
-            description: "The type of ingredient: 'solid' or 'liquid'",
-            enum: ["solid", "liquid"],
-          },
         },
-        required: ["item", "amount", "unit", "type"],
+        required: ["item", "amount", "unit"],
       },
     },
     instructions: {
