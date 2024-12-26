@@ -8,7 +8,7 @@ export const singleRecipeSchema = {
     ingredients: {
       type: "array",
       description:
-        "List of ingredients with item names, amounts, and units, cloves or loafs, butter, plants, yogurts, seasonings (salt, pepper etc), cheese or powders must be preferrably in grams or kilograms or milligrams and other times in pieces, teaspoons, tablespoons, cups, liters and milliliters are reserved for liquids",
+        "List of ingredients with item names, amounts, and units, cloves or loafs, butter, plants, yogurts, seasonings (salt, pepper etc), cheese or powders must be preferrably in grams or kilograms or milligrams and other times in pieces, teaspoons, tablespoons, cups, liters and milliliters, drops are reserved for liquids",
       items: {
         type: "object",
         properties: {
@@ -34,6 +34,7 @@ export const singleRecipeSchema = {
               "teaspoons_solids_plants_powders",
               "tablespoons",
               "teaspoons",
+              "drops",
               "pieces",
             ],
           },
