@@ -23,7 +23,8 @@ export const singleRecipeSchema = {
           },
           unit: {
             type: "string",
-            description: "The unit of measurement for the ingredient",
+            description:
+              "The unit of measurement for the ingredient. Whole pieces only should be measured in pieces, like Chicken or Sheep etc",
             enum: [
               "grams",
               "kilograms",
