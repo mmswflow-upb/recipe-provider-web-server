@@ -38,9 +38,10 @@ const singleRecipeSchema = {
           unit: {
             type: "string",
             description:
-              "The unit of measurement for the ingredient, determined by its type (solid or liquid)",
+              "The unit of measurement for the ingredient, determined by its type (solid or liquid), solid is grams, milligrams, kilograms, pieces, liquid is liters, milliliters, cups, tablespoons, teaspoons",
             enum: [
               "grams",
+              "milligrams",
               "kilograms",
               "liters",
               "milliliters",
