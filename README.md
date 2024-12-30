@@ -26,7 +26,7 @@ npm install
 ```
 
 ### 4. Using Modules
-Make sure that in your package.json, you have set the type to "module"
+To be able to import modules, make sure that in your package.json you have set the type to "module"
 ```json
   "name": "recipe-app-web-server",
   "version": "1.0.0",
