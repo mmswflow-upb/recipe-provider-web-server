@@ -25,10 +25,20 @@ Open the root folder of the repo, then run the command
 npm install
 ```
 
-### 4. Getting an API Key from OpenAI 
+### 4. Using Modules
+Make sure that in your package.json, you have set the type to "module"
+```json
+  "name": "recipe-app-web-server",
+  "version": "1.0.0",
+  "description": "The Recipes Provider",
+  "main": "server.js",
+  "type": "module"
+```
+
+### 5. Getting an API Key from OpenAI 
 Make sure you've got an API key from *OpenAI* and allowed the usage of *GPT-4o*, checkout [this](https://platform.openai.com/docs/overview) page for more details
 
-### 5. Setting Up the Environmental Variables 
+### 6. Setting Up the Environmental Variables 
 Add in the root directory and setup the *.env* file as such
 ```.env
 OPENAI_API_KEY=YOUR_OPENAI_KEY
@@ -36,7 +46,7 @@ SECRET_KEY=YOUR_SECRET_KEY
 PORT=AVAILABLE_PORT
 ```
 
-### 6. Running the Server
+### 7. Running the Server
 Now you can do this by running the command in the terminal
 ```powershell
 npm start
