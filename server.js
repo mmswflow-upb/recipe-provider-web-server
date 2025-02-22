@@ -15,21 +15,11 @@ const openai = new OpenAI({
   apiKey: OPENAI_API_KEY,
 });
 
-function authorize(req) {
-  const devKey = req.headers.devkey;
-  if (devKey !== process.env.SECRET_KEY) {
-    return false;
-  }
-  return true;
-}
-
 // Route to Get Recipes
 app.get("/getRecipes", async (req, res) => {
   const query = req.query.recipeQuery;
   const numberOfRecipes = parseInt(req.query.numberOfRecipes) || 5; // Default to 5 recipes
-  if (!authorize(req)) {
-    return res.status(401).json({ error: "Unauthorized" });
-  }
+
   if (!query) {
     return res
       .status(400)
@@ -67,10 +57,6 @@ app.get("/getRecipes", async (req, res) => {
 });
 
 app.get("/randomQuote", async (req, res) => {
-  if (authorize(req) === false) {
-    return res.status(401).json({ error: "Unauthorized" });
-  }
-
   try {
     const completion = await openai.chat.completions.create({
       model: "gpt-4o",
