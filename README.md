@@ -42,7 +42,6 @@ Make sure you've got an API key from *OpenAI* and allowed the usage of *GPT-4o*,
 Add in the root directory and setup the *.env* file as such
 ```.env
 OPENAI_API_KEY=YOUR_OPENAI_KEY
-SECRET_KEY=YOUR_SECRET_KEY
 PORT=AVAILABLE_PORT
 ```
 
