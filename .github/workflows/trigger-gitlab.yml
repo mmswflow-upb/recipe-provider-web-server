@@ -12,6 +12,6 @@ jobs:
       - name: Trigger GitLab CI/CD Deployment Pipeline
         run: |
           curl -X POST \
-            -F token=${{ secrets.GITLAB_TRIGGER_TOKEN }} \
+            -F token=${{ secrets.GITLAB_TRIGGER_DEPLOYMENT_TOKEN }} \
             -F ref=main \
             https://gitlab.com/api/v4/projects/67382971/trigger/pipeline
